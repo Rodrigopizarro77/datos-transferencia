@@ -1,174 +1,493 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Morena &amp; Rodrigo · Datos para transferencia</title>
 
-    <title>Datos para transferencia</title>
+<style>
+  :root{
+    --bg: #f3f4ef;
+    --green: #829180;
+    --green-dark: #5c6b5a;
+    --green-deep: #455243;
+    --green-tint: #eef1ec;
+    --gray: #606060;
+    --gray-soft: #8a8a86;
+    --white: #ffffff;
+    --card: #fbfbf9;
+    --line: rgba(130,145,128,0.28);
+    --shadow: 0 10px 30px rgba(69,82,67,0.10);
+    --shadow-soft: 0 4px 14px rgba(69,82,67,0.08);
+    --radius: 16px;
+    --serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --mono: 'Courier New', Courier, monospace;
+  }
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-        body {
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
+  html, body{ height: 100%; }
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+  body{
+    margin: 0;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg);
+    color: var(--gray);
+    font-family: var(--sans);
+    padding: clamp(14px, 4vw, 32px);
+    overflow-x: hidden;
+  }
 
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #222;
-        }
+  /* subtle ambient background texture */
+  body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(130,145,128,0.10), transparent 45%),
+      radial-gradient(circle at 85% 90%, rgba(130,145,128,0.12), transparent 45%);
+    pointer-events: none;
+    z-index: 0;
+  }
 
-        .contenedor {
-            width: 100%;
-            max-width: 420px;
+  .contenedor{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 440px;
+    background: var(--card);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(130,145,128,0.18);
+    padding: clamp(28px, 7vw, 44px) clamp(20px, 6vw, 36px) clamp(26px, 6vw, 34px);
+  }
 
-            background: white;
-            padding: 30px 24px;
-            border-radius: 18px;
+  /* ---------- Header / monogram ---------- */
 
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
+  .encabezado{
+    text-align: center;
+    margin-bottom: clamp(22px, 5vw, 30px);
+  }
 
-        .icono {
-            text-align: center;
-            font-size: 42px;
-            margin-bottom: 10px;
-        }
+  .monograma{
+    width: 68px;
+    height: 68px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, var(--white), var(--green-tint));
+  }
 
-        h1 {
-            text-align: center;
-            font-size: 24px;
-            margin: 0 0 30px 0;
-        }
+  .monograma span{
+    font-family: var(--serif);
+    font-size: 19px;
+    letter-spacing: 1px;
+    color: var(--green-deep);
+  }
 
-        .dato {
-            margin-bottom: 22px;
-        }
+  .nombres{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(24px, 6vw, 29px);
+    color: var(--green-deep);
+    margin: 0 0 6px;
+    letter-spacing: 0.3px;
+  }
 
-        .etiqueta {
-            display: block;
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: #555;
-        }
+  .subtitulo{
+    font-size: 12px;
+    letter-spacing: 2.2px;
+    text-transform: uppercase;
+    color: var(--gray-soft);
+    margin: 0;
+  }
 
-        .campo {
-            display: flex;
-            align-items: center;
+  /* ---------- ornamental divider ---------- */
 
-            background: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 10px;
+  .divisor{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 22px 0 16px;
+  }
+  .divisor::before, .divisor::after{
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+  .divisor svg{ flex-shrink: 0; opacity: 0.75; }
 
-            padding: 12px;
-        }
+  .seccion{ margin-bottom: 6px; }
 
-        .valor {
-            flex: 1;
-            font-size: 16px;
-            word-break: break-all;
-        }
+  .titulo-seccion{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--green-dark);
+    text-align: center;
+    margin: 0 0 16px;
+    letter-spacing: 0.4px;
+  }
 
-        .boton {
-            border: none;
-            background: white;
-            cursor: pointer;
+  /* ---------- data fields ---------- */
 
-            font-size: 20px;
-            padding: 5px 7px;
-            margin-left: 8px;
+  .dato{ margin-bottom: 12px; }
+  .dato:last-child{ margin-bottom: 0; }
 
-            border-radius: 7px;
-        }
+  .etiqueta{
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: var(--gray-soft);
+    margin-bottom: 7px;
+    padding-left: 2px;
+  }
 
-        .boton:active {
-            transform: scale(0.95);
-        }
+  .campo{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--white);
+    border: 1px solid rgba(130,145,128,0.22);
+    border-radius: 12px;
+    padding: 12px 8px 12px 14px;
+    min-height: 50px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
 
-        .mensaje {
-            text-align: center;
-            height: 20px;
+  .campo:focus-within, .campo.activo{
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(130,145,128,0.14);
+  }
 
-            font-size: 14px;
-            font-weight: bold;
-            color: #16803c;
+  .valor{
+    flex: 1;
+    min-width: 0;
+    font-size: 15px;
+    color: #3c433b;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+  }
 
-            margin-top: 5px;
-        }
-    </style>
+  .valor.numero{
+    font-family: var(--mono);
+    font-size: 13.5px;
+    letter-spacing: 0.3px;
+  }
+
+  .boton-copiar{
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 10px;
+    background: var(--green-tint);
+    color: var(--green-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.12s ease, background 0.2s ease;
+  }
+
+  .boton-copiar:hover{ background: rgba(130,145,128,0.28); }
+  .boton-copiar:active{ transform: scale(0.90); }
+
+  .boton-copiar svg{ width: 18px; height: 18px; }
+
+  .boton-copiar .icono-check{ display: none; }
+  .boton-copiar.copiado{ background: var(--green); color: var(--white); }
+  .boton-copiar.copiado .icono-copiar{ display: none; }
+  .boton-copiar.copiado .icono-check{ display: block; }
+
+  /* ---------- whatsapp ---------- */
+
+  .fila-efectivo{ display: flex; flex-direction: column; gap: 10px; }
+
+  .boton-whatsapp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 100%;
+    background: var(--green-dark);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    padding: 13px 16px;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.12s ease;
+    min-height: 48px;
+  }
+
+  .boton-whatsapp:hover{ background: var(--green-deep); }
+  .boton-whatsapp:active{ transform: scale(0.98); }
+  .boton-whatsapp svg{ width: 19px; height: 19px; flex-shrink: 0; }
+
+  /* ---------- footer note ---------- */
+
+  .nota{
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray-soft);
+    margin-top: 24px;
+    line-height: 1.5;
+  }
+
+  .nota .corazon{ display: inline-block; transform: translateY(1px); opacity: 0.7; }
+
+  /* ---------- toast ---------- */
+
+  .toast{
+    position: fixed;
+    left: 50%;
+    bottom: clamp(20px, 6vh, 40px);
+    transform: translate(-50%, 14px);
+    background: var(--green-deep);
+    color: var(--white);
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 11px 22px;
+    border-radius: 30px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 10;
+    white-space: nowrap;
+    max-width: calc(100vw - 40px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .toast.visible{
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  @media (max-width: 340px){
+    .valor.numero{ font-size: 12.5px; }
+    .boton-whatsapp{ font-size: 13.5px; }
+  }
+</style>
 </head>
 
 <body>
 
-    <div class="contenedor">
+  <div class="contenedor">
 
-        <div class="icono">🏦</div>
-
-        <h1>Datos para transferencia</h1>
-
-        <div class="dato">
-            <span class="etiqueta">Alias</span>
-
-            <div class="campo">
-                <span class="valor" id="alias">MI.ALIAS.BANCO</span>
-
-                <button class="boton" onclick="copiar('alias', 'Alias copiado ✓')" aria-label="Copiar Alias">
-                    📋
-                </button>
-            </div>
-        </div>
-
-        <div class="dato">
-            <span class="etiqueta">CBU</span>
-
-            <div class="campo">
-                <span class="valor" id="cbu">0720123456789012345678</span>
-
-                <button class="boton" onclick="copiar('cbu', 'CBU copiado ✓')" aria-label="Copiar CBU">
-                    📋
-                </button>
-            </div>
-        </div>
-
-        <div class="mensaje" id="mensaje"></div>
-
+    <div class="encabezado">
+      <div class="monograma"><span>M&amp;R</span></div>
+      <h1 class="nombres">Morena &amp; Rodrigo</h1>
+      <p class="subtitulo">Datos para el regalo</p>
     </div>
 
-    <script>
-        function copiar(id, texto) {
+    <!-- Dólares -->
+    <div class="seccion">
+      <div class="divisor">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5L7 0Z" fill="#829180"/></svg>
+      </div>
+      <h2 class="titulo-seccion">Dólares</h2>
 
-            const elemento = document.getElementById(id);
-            const contenido = elemento.innerText;
+      <div class="dato">
+        <span class="etiqueta">Alias</span>
+        <div class="campo">
+          <span class="valor" id="alias-usd">morenayrodrigousd</span>
+          <button class="boton-copiar" data-target="alias-usd" aria-label="Copiar alias en dólares">
+            <svg class="icono-copiar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icono-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+          </button>
+        </div>
+      </div>
 
-            navigator.clipboard.writeText(contenido)
-                .then(function() {
+      <div class="dato">
+        <span class="etiqueta">CBU</span>
+        <div class="campo">
+          <span class="valor numero" id="cbu-usd">1430001714008888180020</span>
+          <button class="boton-copiar" data-target="cbu-usd" aria-label="Copiar CBU en dólares">
+            <svg class="icono-copiar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icono-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
 
-                    const mensaje = document.getElementById("mensaje");
+    <!-- Pesos -->
+    <div class="seccion">
+      <div class="divisor">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5L7 0Z" fill="#829180"/></svg>
+      </div>
+      <h2 class="titulo-seccion">Pesos argentinos</h2>
 
-                    mensaje.innerText = texto;
+      <div class="dato">
+        <span class="etiqueta">Alias</span>
+        <div class="campo">
+          <span class="valor" id="alias-ars">morenayrodrigo2602</span>
+          <button class="boton-copiar" data-target="alias-ars" aria-label="Copiar alias en pesos">
+            <svg class="icono-copiar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icono-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+          </button>
+        </div>
+      </div>
 
-                    setTimeout(function() {
-                        mensaje.innerText = "";
-                    }, 2000);
+      <div class="dato">
+        <span class="etiqueta">CBU</span>
+        <div class="campo">
+          <span class="valor numero" id="cbu-ars">1430001713008888180012</span>
+          <button class="boton-copiar" data-target="cbu-ars" aria-label="Copiar CBU en pesos">
+            <svg class="icono-copiar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icono-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
 
-                })
-                .catch(function() {
+    <!-- Titular -->
+    <div class="seccion">
+      <div class="divisor">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5L7 0Z" fill="#829180"/></svg>
+      </div>
+      <h2 class="titulo-seccion">Titular de la cuenta</h2>
 
-                    alert("No se pudo copiar automáticamente. Mantené presionado el dato para copiarlo.");
+      <div class="dato">
+        <span class="etiqueta">Nombre</span>
+        <div class="campo">
+          <span class="valor" id="titular">Rodrigo Jose Pizarro</span>
+          <button class="boton-copiar" data-target="titular" aria-label="Copiar nombre del titular">
+            <svg class="icono-copiar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icono-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+          </button>
+        </div>
+      </div>
 
-                });
+      <div class="dato">
+        <span class="etiqueta">CUIL</span>
+        <div class="campo">
+          <span class="valor numero" id="cuil">20-41365307-0</span>
+          <button class="boton-copiar" data-target="cuil" aria-label="Copiar CUIL">
+            <svg class="icono-copiar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icono-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Efectivo -->
+    <div class="seccion">
+      <div class="divisor">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5L7 0Z" fill="#829180"/></svg>
+      </div>
+      <h2 class="titulo-seccion">Pago en efectivo</h2>
+
+      <div class="fila-efectivo">
+        <div class="dato">
+          <span class="etiqueta">Teléfono</span>
+          <div class="campo">
+            <span class="valor numero" id="telefono">2613633084</span>
+            <button class="boton-copiar" data-target="telefono" aria-label="Copiar teléfono">
+              <svg class="icono-copiar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <svg class="icono-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <a class="boton-whatsapp" id="link-whatsapp" href="https://wa.me/5492613633084" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.09c-.24.68-1.4 1.31-1.93 1.38-.5.08-1.11.11-1.79-.11a15.3 15.3 0 0 1-1.62-.6 12.3 12.3 0 0 1-4.71-4.16c-.35-.47-1.17-1.56-1.17-2.98 0-1.41.74-2.1 1-2.39.26-.29.57-.36.76-.36.19 0 .38 0 .55.01.17.01.41-.07.64.49.24.58.81 2 .88 2.15.07.15.12.32.02.51-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.89 1.05.93 1.93 1.22 2.21 1.36.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.63-.15.26.1 1.65.78 1.93.92.28.14.47.21.54.33.07.12.07.66-.17 1.34z"/></svg>
+          Abrir WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <p class="nota">Tocá el ícono <span aria-hidden="true">📋</span> junto a cada dato para copiarlo <span class="corazon">♥</span></p>
+
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copiado ✓</div>
+
+  <script>
+    (function(){
+      var toast = document.getElementById('toast');
+      var toastTimer = null;
+
+      function mostrarToast(texto){
+        toast.textContent = texto;
+        toast.classList.add('visible');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function(){
+          toast.classList.remove('visible');
+        }, 1800);
+      }
+
+      function copiarFallback(texto){
+        var textarea = document.createElement('textarea');
+        textarea.value = texto;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-1000px';
+        textarea.style.left = '-1000px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        textarea.setSelectionRange(0, textarea.value.length);
+        var ok = false;
+        try{ ok = document.execCommand('copy'); }
+        catch(e){ ok = false; }
+        document.body.removeChild(textarea);
+        return ok;
+      }
+
+      function copiarTexto(texto){
+        if (navigator.clipboard && navigator.clipboard.writeText){
+          return navigator.clipboard.writeText(texto).then(function(){ return true; }).catch(function(){
+            return copiarFallback(texto);
+          });
         }
-    </script>
+        return Promise.resolve(copiarFallback(texto));
+      }
+
+      var botones = document.querySelectorAll('.boton-copiar');
+
+      botones.forEach(function(boton){
+        boton.addEventListener('click', function(){
+          var targetId = boton.getAttribute('data-target');
+          var elemento = document.getElementById(targetId);
+          var campo = boton.closest('.campo');
+          var texto = elemento.textContent.trim();
+
+          Promise.resolve(copiarTexto(texto)).then(function(resultado){
+            if (resultado){
+              boton.classList.add('copiado');
+              if (campo) campo.classList.add('activo');
+              mostrarToast('Copiado ✓');
+            } else {
+              mostrarToast('No se pudo copiar. Mantené presionado el dato.');
+            }
+
+            setTimeout(function(){
+              boton.classList.remove('copiado');
+              if (campo) campo.classList.remove('activo');
+            }, 1600);
+          });
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
-```
